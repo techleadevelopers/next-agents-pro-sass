@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.imgDark {
+  display: none;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+
+  .imgLight {
+    display: none;
+  }
+
+  .imgDark {
+    display: unset;
+  }
+}
+
+/* Variáveis Globais */
+@layer base {
+  :root {
+    /* Cores Padrão Light */
+    --background: #f7f7f7;    /* Cinza Claro */
+    --foreground: #333333;    /* Preto */
+    --primary: #4682b4;       /* Azul */
+    --secondary: #7a288a;     /* Roxo */
+
+    /* Cores Gráficos */
+    --chart-1: #4567b7; 
+    --chart-2: #7a288a; 
+    --chart-3: #87ceeb; 
+    --chart-4: #c7b8ea; 
+    --chart-5: #ffffff; 
+
+    /* Radius Global */
+    --radius: 0.5rem;
+
+    /* Cor Borda Global */
+    --border: #e5e7eb; /* Tailwind gray-200 */
+  }
+
+  /* Modo Dark */
+  .dark {
+    --background: #333333; 
+    --foreground: #f7f7f7; 
+    --primary: #f7f7f7;    
+    --secondary: #333333; 
+
+    /* Cores Gráficos Dark Mode */
+    --chart-1: #220 70% 50%;
+    --chart-2: #160 60% 45%;
+    --chart-3: #30 80% 55%;
+    --chart-4: #280 65% 60%;
+    --chart-5: #340 75% 55%;
+
+    --border: #444444; /* Cinza escuro */
+  }
+}
+
+/* Estilização Base Global */
+@layer base {
+  * {
+    border-color: var(--border); /* Corrigindo o problema do border-border */
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

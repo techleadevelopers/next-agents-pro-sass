@@ -1,0 +1,24 @@
+{
+  "name": "agents-core",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+     "dev": "ts-node-dev src/index.ts",
+     "build": "tsc --build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@langchain/community": "^0.3.40",
+    "@langchain/core": "^0.3.44",
+    "@langchain/langgraph": "^0.2.63",
+    "axios": "^1.8.4",
+    "chalk": "^5.4.1",
+    "dotenv": "^16.5.0",
+    "langchain": "^0.3.21",
+    "ollama": "^0.5.14"
+  }
+}

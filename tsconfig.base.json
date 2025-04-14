@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@nextagent-pro/database/*": ["packages/database/*"],
+        "@nextagent-pro/generated/*": ["packages/generated/*"],
+        "@nextagent-pro/agents-core/*": ["packages/agents-core/src/*"],
+        "@nextagent-pro/whatsapp-sdk/*": ["packages/whatsapp-sdk/*"]
+      },
+      "module": "commonjs",
+      "target": "ES2023",
+      "strict": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "forceConsistentCasingInFileNames": true
+    }
+  }
+  

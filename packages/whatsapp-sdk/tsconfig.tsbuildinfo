@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/core/whatsapp.client.ts","./src/core/whatsapp.manager.ts","./src/core/whatsapp.session.ts","./src/core/whatsapp.types.ts","./src/core/whatsapp.utils.ts","./src/core/config/whatsapp.config.ts","./src/core/services/media.service.ts","./src/core/services/receive-message.service.ts","./src/core/services/send-message.service.ts"],"version":"5.8.2"}

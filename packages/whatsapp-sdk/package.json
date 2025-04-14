@@ -1,0 +1,40 @@
+{
+  "name": "@nextagent-pro/whatsapp-sdk",
+  "version": "1.0.0",
+  "description": "SDK Oficial de Integração com WhatsApp Multi-Agent para NexAgent-Pro HyperAgents IA.",
+  "author": "Paulo Silas de Campos Filho",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc --build",
+    "lint": "eslint src --ext .ts",
+    "test": "echo \"No tests implemented yet\" && exit 0"
+  },
+  "keywords": [
+    "whatsapp",
+    "sdk",
+    "baileys",
+    "multi-tenant",
+    "multi-agent",
+    "hyperagent",
+    "nexagent-pro",
+    "automation"
+  ],
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.17.16",
+    "axios": "^1.8.4",
+    "dotenv": "^16.5.0",
+    "qrcode-terminal": "^0.12.0",
+    "sharp": "^0.34.1"
+  },
+  "devDependencies": {
+    "@types/qrcode-terminal": "^0.12.2",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.54.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.0"
+  }
+}
