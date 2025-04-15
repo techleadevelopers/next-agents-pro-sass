@@ -25,7 +25,7 @@
     "dayjs": "^1.11.13",
     "dotenv": "^16.3.1",
     "framer-motion": "^11.0.6",
-    "lucide-react": "^0.299.0",
+    "lucide-react": "^0.488.0",
     "next": "^15.2.4",
     "postcss": "^8.5.3",
     "react": "^19.1.0",
@@ -47,6 +47,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.1",
+    "apexcharts": "^4.5.0",
     "eslint": "^9.24.0",
     "typescript": "5.8.2"
   }
