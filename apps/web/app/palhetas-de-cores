@@ -1,0 +1,49 @@
+Identidade Visual Atual do NextAgent-Pro
+🎨 Paleta de Cores Global
+
+Nome	Cor	Uso
+primary	#4682b4	Azul base, principal, destaque em botões, ícones e textos importantes
+secondary	#7a288a	Roxo escuro, usado para contraste ou detalhes secundários
+accent	#87ceeb	Azul claro (SkyBlue), usado para gradientes, fundos e destaques sutis
+chart.1 a chart.5	Paleta personalizada	Para os gráficos Nivo/Visx
+background	#f7f7f7	Cor de fundo claro
+foreground	#333333	Cor padrão de texto escuro
+🎨 Gradiente Global (Fundo dos Cards)
+Declarado como:
+
+tailwind
+Copiar
+Editar
+bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20
+→ Visual Sci-Fi / HUD Premium.
+
+💠 Tipografia (Fonte)
+text-sm até text-3xl
+
+font-extrabold
+
+bg-clip-text text-transparent (gradiente no texto)
+
+tracking-wide (espaçamento)
+
+text-shadow customizado (em números principais):
+
+tailwind
+Copiar
+Editar
+text-shadow: 0 0 6px #00f0ff, 0 0 12px #00k9ff, 0 0 20px gray
+🌀 Efeitos Visuais
+Animate FadeIn
+
+Animate Gradient-X
+
+Backdrop-blur-md
+
+Backdrop-saturate-150
+
+BoxShadow HUD:
+
+tailwind
+Copiar
+Editar
+shadow-[0_0_12px_rgba(134,206,235,0.2),0_0_24px_rgba(134,206,235,0.1)]

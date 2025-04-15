@@ -1,0 +1,63 @@
+
+Módulo/Componente	Chart Ideal	Lib Recomendada	Finalidade
+gestao-de-agentes/ListaDeAgentes.tsx	Donut Chart / Pie Chart IA Status	Nivo Charts	Mostrar % de agentes ativos, inativos, em treino.
+historico-de-conversas/LogsDeConversas.tsx	Timeline Chart / Heatmap	Visx + Nivo Heatmap	Mostrar picos de atividade por hora/dia da semana.
+metricas-avancadas/GraficoMensagensPorPeriodo.tsx	Line Chart Multi-series	Visx	Exibir volume de mensagens enviadas vs recebidas.
+metricas-avancadas/PerformancePorAgente.tsx	Bar Chart Horizontal	Nivo Bar	Performance individual dos agentes IA.
+metricas-avancadas/TabelaKPIConversao.tsx	KPIs Cards com Sparkline	Tremor UI	Pequenos gráficos de tendência ao lado de KPIs.
+relatorios/RelatoriosDetalhados.tsx	Area Chart + Table Sync	Visx	Relatórios detalhados e drilldown de dados.
+loja-templates-ia/DetalhesTemplate.tsx	Radial Chart	Nivo	Mostrar popularidade e vendas de templates IA.
+integracoes/IntegraCRMs.tsx	Flow Diagram	Visx Graph	Exibir conexões de dados / integrações ativas.
+configuracoes-avancadas-ia/RegrasAutomacaoPorNicho.tsx	Sankey Chart	Nivo Sankey	Visualizar fluxo automatizado IA dos clientes.
+financeiro/HistoricoDePagamentos.tsx	Line Chart + Area Chart	Visx	Histórico financeiro de pagamentos / receita mensal.
+kpis-saas/MRRChart.tsx	Line Chart + Custom Tooltip	Visx + Tremor	Evolução de MRR com detalhes ao passar mouse.
+kpis-saas/RetencaoChurn.tsx	Donut Chart + KPI Cards	Nivo + Tremor	Exibir % Retenção vs Churn Monthly.
+kpis-saas/UpsellMetrics.tsx	Bar Chart + KPI Cards	Tremor	Receita extra de upsell / cross-sell.
+servicos-premium/DemonstracaoROI.tsx	Area Chart Acumulativo	Nivo	Mostrar crescimento do ROI após contratar serviço.
+dashboard/DashboardResultadosFinanceiros.tsx	Summary Cards + Mini Charts	Tremor	Painel Resumido Financeiro — Faturamento / Leads / Conversão.
+dashboard/Graficos.tsx	Pie Chart / Line Chart Mix	Nivo Charts	Gráficos rápidos sobre operação geral.
+
+✅ Arquivos .tsx que vão integrar os charts:
+📁 gestao-de-agentes/
+ListaDeAgentes.tsx
+
+📁 historico-de-conversas/
+LogsDeConversas.tsx
+
+📁 metricas-avancadas/
+GraficoMensagensPorPeriodo.tsx
+
+PerformancePorAgente.tsx
+
+TabelaKPIConversao.tsx
+
+📁 relatorios/
+RelatoriosDetalhados.tsx
+
+📁 loja-templates-ia/
+DetalhesTemplate.tsx
+
+📁 integracoes/
+IntegraCRMs.tsx
+
+📁 configuracoes-avancadas-ia/
+RegrasAutomacaoPorNicho.tsx
+
+📁 financeiro/
+HistoricoDePagamentos.tsx
+
+📁 kpis-saas/
+MRRChart.tsx
+
+RetencaoChurn.tsx
+
+UpsellMetrics.tsx
+
+📁 servicos-premium/
+DemonstracaoROI.tsx
+
+📁 dashboard/
+DashboardResultadosFinanceiros.tsx
+
+Graficos.tsx
+

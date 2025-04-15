@@ -1,0 +1,6 @@
+{
+    "name": "@nextagent-pro/ui",
+    "main": "src/index.ts",
+    "types": "src/index.ts"
+  }
+  
