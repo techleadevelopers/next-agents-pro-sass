@@ -4,19 +4,17 @@ import React from 'react'
 import NavbarWhatsApp from '../controle-de-sessoes-whatsapp/components/NavbarWhatsApp'
 import DashboardGeralContainer from './containers/Dashboard Geral.container'
 import ControleDeSessoesWhatsAppContainer from '../controle-de-sessoes-whatsapp/containers/ControleDeSessõesWhatsApp.container'
+import NavbarDashboard from './components/NavbarDashboad' // << Importação do novo nav direito
 
 export default function DashboardPage() {
   return (
-    <main className="min-h-screen flex">
+    <main className="min-h-screen flex relative">
 
+      {/* Sidebar Esquerda (Menu Sessões) */}
+      <NavbarWhatsApp />
 
-  {/* Sidebar Left Menu */}
-  <NavbarWhatsApp />
-
-
-
-      {/* Conteúdo Dashboard */}
-      <section className="flex-1 p-8 bg-background text-foreground">
+      {/* Conteúdo Central do Dashboard */}
+      <section className="flex-1 p-8 bg-background text-foreground overflow-y-auto">
         <div className="max-w-7xl mx-auto space-y-8">
 
           <header className="space-y-4 text-center">
@@ -36,8 +34,7 @@ export default function DashboardPage() {
         </div>
       </section>
 
-     
-
+   
     </main>
   )
 }

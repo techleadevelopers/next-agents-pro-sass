@@ -16,9 +16,9 @@ const config: Config = {
       colors: {
         background: { DEFAULT: "#f7f7f7" },
         foreground: { DEFAULT: "#333333" },
-        primary: { DEFAULT: "#4682b4" },   // Azul
+        primary: { DEFAULT: "#4682b4" }, // Azul
         secondary: { DEFAULT: "#7a288a" }, // Roxo escuro
-        accent: { DEFAULT: "#87ceeb" },    // Azul claro SkyBlue
+        accent: { DEFAULT: "#87ceeb" }, // Azul claro SkyBlue
         chart: {
           '1': '#4567b7',
           '2': '#7a288a',
@@ -30,6 +30,10 @@ const config: Config = {
       backgroundImage: {
         // Gradiente HUD Brutal - Declarado para reutilização global
         'hud-gradient': 'linear-gradient(to bottom right, theme("colors.primary / 20"), theme("colors.accent / 10"), theme("colors.primary / 20"))',
+      },
+      maxWidth: {
+        '8xl': '96rem', // Define uma largura maior (1536px)
+        '9xl': '108rem', // Define uma largura ainda maior (1728px)
       },
     },
   },
