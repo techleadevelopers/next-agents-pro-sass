@@ -1,0 +1,8 @@
+export enum WhatsAppStatus {
+    INITIALIZING = 'INITIALIZING',
+    WAITING_QR = 'WAITING_QR',
+    CONNECTED = 'CONNECTED',
+    DISCONNECTED = 'DISCONNECTED',
+    ERROR = 'ERROR',
+  }
+  

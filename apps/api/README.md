@@ -21,6 +21,130 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+
+ Módulo whatsapp (DDD + Clean)
+pgsql
+Copiar
+Editar
+apps/
+└── api/
+    └── src/
+        └── modules/
+            └── whatsapp/
+                ├── domain/
+                │   ├── entities/
+                │   │   └── whatsapp-session.entity.ts
+                │   ├── repositories/
+                │   │   └── whatsapp.repository.ts
+                │   └── value-objects/
+                │       └── whatsapp-status.vo.ts
+                │
+                ├── application/
+                │   ├── use-cases/
+                │   │   ├── send-message.use-case.ts
+                │   │   ├── init-session.use-case.ts
+                │   │   ├── disconnect-session.use-case.ts
+                │   │   └── get-session-status.use-case.ts
+                │   └── dto/
+                │       ├── send-message.dto.ts
+                │       ├── init-session.dto.ts
+                │       └── session-status.dto.ts
+                │
+                ├── infrastructure/
+                │   ├── database/
+                │   │   ├── prisma/
+                │   │   │   └── whatsapp.prisma.ts
+                │   │   └── whatsapp.repository.impl.ts
+                │   ├── client/
+                │   │   └── baileys.client.ts
+                │   ├── gateways/
+                │   │   └── whatsapp.gateway.ts  # (WebSocket - Status em tempo real)
+                │   └── queue/
+                │       └── whatsapp.queue.ts     # Worker BullMQ (envio assíncrono)
+                │
+                ├── presentation/
+                │   ├── controllers/
+                │   │   └── whatsapp.controller.ts
+                │   └── routes/
+                │       └── whatsapp.routes.ts
+                │
+                └── config/
+                    └── whatsapp.config.ts
+🔍 Explicação Modular
+
+Pasta/Arquivo	Descrição
+domain/entities/whatsapp-session.entity.ts	Entidade representando uma sessão WhatsApp (número, status, agentId, tenantId, etc).
+domain/repositories/	Abstração da persistência para sessões e logs (interface).
+domain/value-objects/	Representações imutáveis como status (CONNECTED, DISCONNECTED, LOADING_QR, etc).
+application/use-cases/	Casos de uso encapsulando lógica como "iniciar sessão", "enviar mensagem", "desconectar".
+application/dto/	Tipagens e validações para entrada e saída nos use-cases.
+infrastructure/client/baileys.client.ts	Wrapper para SDK Baileys, gerencia instâncias, QR Codes, envio e recepção.
+infrastructure/queue/	Sistema de filas com BullMQ para envio assíncrono de mensagens.
+infrastructure/gateways/whatsapp.gateway.ts	WebSocket para push status (QR Code, eventos de mensagem, status de sessão).
+infrastructure/database/prisma/	Schema e repository real implementando a interface do domínio.
+presentation/controllers/whatsapp.controller.ts	Controller REST integrando com use-cases.
+config/whatsapp.config.ts	Configs como timeout de sessão, max conexões, logs, paths.
+🌐 Endpoints (REST) - Já Alinhados com Estrutura
+
+Verbo	Rota	Caso de uso
+POST	/whatsapp/:agentId/send-message	send-message.use-case.ts
+POST	/whatsapp/:agentId/sessions/init	init-session.use-case.ts
+DELETE	/whatsapp/:agentId/sessions/:sessionId	disconnect-session.use-case.ts
+GET	/whatsapp/:agentId/status	get-session-status.use-case.ts
+GET	/debug/whatsapp/:agentId/connection	Diagnóstico de sessão (baileys.client.ts)
+🔁 Fluxo de Envio de Mensagens via Baileys (Async com IA)
+User envia mensagem para um número → /send-message
+
+API chama SendMessageUseCase
+
+UseCase envia mensagem para fila (BullMQ)
+
+Worker (whatsapp.queue.ts) consome a fila e chama baileys.client.ts
+
+Cliente WhatsApp envia a mensagem
+
+Log e status da entrega são salvos via repositório
+
+Resposta é enviada de volta ao frontend via Socket Gateway
+
+🎯 Alinhamento com Estratégia SaaS
+
+Requisito	Como a estrutura cobre
+Multi-Tenant	Toda entidade e sessão carrega tenantId, agentId como chave obrigatória
+Independência de APIs	Integração via Baileys SDK (open-source, local)
+Gerenciamento IA por Nicho	Toda sessão WhatsApp está atrelada a um HiperAgente
+Painel Futurista (HUD Sci-Fi)	A comunicação em tempo real via whatsapp.gateway.ts alimenta status, QR Code e ações de controle no frontend
+Alta escalabilidade	Baileys é stateless, e a orquestração é feita por filas com workers isolados
+Logs + Métricas	Cada mensagem, sessão e erro pode ser logado na tabela de logs, alimentando o módulo metrics/
+✅ Próximos Arquivos a Codar (sugestão de ordem)
+whatsapp-session.entity.ts (entidade base)
+
+init-session.use-case.ts + baileys.client.ts
+
+whatsapp.controller.ts com endpoint de /sessions/init
+
+whatsapp.gateway.ts para emitir QR code por socket
+
+send-message.use-case.ts + whatsapp.queue.ts
+
+Repositórios + Prisma Model
+
+🔥 Quer que eu comece a gerar os arquivos?
+Posso já te entregar:
+
+ whatsapp-session.entity.ts
+
+ init-session.use-case.ts
+
+ baileys.client.ts
+
+ whatsapp.controller.ts
+
+Ou prefere que eu siga algum outro caminho?
+
+Me fala o que você prefere: começar pela base das entidades e casos de uso ou já ir direto para o fluxo funcional de sessão e envio de mensagem.
+
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.

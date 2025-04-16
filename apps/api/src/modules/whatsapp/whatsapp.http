@@ -1,0 +1,19 @@
+### Iniciar sessão
+POST http://localhost:3000/whatsapp/AGENT_ID/sessions/init
+Content-Type: application/json
+
+{
+  "tenantId": "TENANT_ID"
+}
+
+### Ver status
+GET http://localhost:3000/whatsapp/AGENT_ID/status
+
+### Enviar mensagem
+POST http://localhost:3000/whatsapp/AGENT_ID/send-message
+Content-Type: application/json
+
+{
+  "phone": "5511999999999",
+  "message": "Mensagem via .http ⚡"
+}

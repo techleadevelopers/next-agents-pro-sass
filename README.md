@@ -23,38 +23,41 @@ O **NextAgent-Pro** é uma plataforma brutalmente poderosa desenvolvida para cri
 - Varejo / Atendimento B2C
 
 🎯 Casos de Uso — Por Nicho de Mercado
-Nicho	Resultados Esperados
-Clínicas e Hospitais	Redução de 70% nos atendimentos manuais via WhatsApp
-Restaurantes	Cardápio automatizado + pedidos via IA
-Imobiliárias	Pré-venda e qualificação de leads IA
-Academias	Gestão de alunos, envio de treinos personalizados
-E-commerce	Respostas rápidas, suporte 24/7 e Upsell IA
-Serviços	Atendimento automatizado e follow-up inteligente
+ Nicho	Resultados Esperados
+
+ - Clínicas e Hospitais	Redução de 70% nos atendimentos manuais via WhatsApp
+ - Restaurantes	Cardápio automatizado + pedidos via IA
+ - Imobiliárias	Pré-venda e qualificação de leads IA
+ - Academias	Gestão de alunos, envio de treinos personalizados
+ - E-commerce	Respostas rápidas, suporte 24/7 e Upsell IA
+ - Serviços	Atendimento automatizado e follow-up inteligente
 
 ⚡ Em 30 segundos — O que o NextAgent-Pro resolve?
 Automatize o atendimento e processos da sua empresa via WhatsApp com agentes IA ultra personalizados, independentes de APIs pagas, com controle total dos dados e uma experiência premium focada em nichos.
 
-Criação de Agentes IA em minutos
-Gestão Multi-Tenant de clientes
-Integração real com WhatsApp
-IA Local: performance e economia
-UX brutal Sci-Fi Dev Premium
+ - Criação de Agentes IA em minutos
+ - Gestão Multi-Tenant de clientes
+ - Integração real com WhatsApp
+ - IA Local: performance e economia
+ - UX brutal Sci-Fi Dev Premium
 
 🎯 Para Quem é o NextAgent-Pro?
 O NextAgent-Pro é ideal para:
 
 Público-alvo	Benefício direto
-Consultorias e Agências de Marketing	Criar e revender Agentes IA sob medida para clientes
-Empresas de Atendimento ao Cliente	Reduzir custos operacionais com IA local 24/7
-Startups SaaS White-label	Criar seu próprio produto IA com marca própria
-Clínicas, Restaurantes, Imobiliárias, E-commerce	Atendimento automatizado via WhatsApp com personalização extrema
-💰 Modelos de Monetização (SaaS)
+
+ - Consultorias e Agências de Marketing	Criar e revender Agentes IA sob medida para clientes
+ - Empresas de Atendimento ao Cliente	Reduzir custos operacionais com IA local 24/7
+ - Startups SaaS White-label	Criar seu próprio produto IA com marca própria
+ - Clínicas, Restaurantes, Imobiliárias, E-commerce	Atendimento automatizado via WhatsApp com personalização extrema
+ - Modelos de Monetização (SaaS)
 O NextAgent-Pro foi desenhado para operar como SaaS Multi-Tenant com planos escaláveis:
 
 Plano	Público	Recursos
-Básico	Pequenas empresas	1 Agente IA
-Profissional	Empresas em crescimento	Até 5 Agentes IA
-White-label	Agências e Revendedores	Plataforma 100% customizável
+
+ - Básico	Pequenas empresas	1 Agente IA
+ - Profissional	Empresas em crescimento	Até 5 Agentes IA
+ - White-label	Agências e Revendedores	Plataforma 100% customizável
 
 📢 Estratégia Comercial Inicial (Go-to-Market)
 
@@ -73,14 +76,7 @@ Enquanto isso:
 Screenshots atualizadas estão disponíveis em: /public/screenshots
 Vídeo Demo (WIP) será publicado em: youtube.com/@nextagent-pro (placeholder)
 
-📊 Roadmap de Evolução
-Status	Funcionalidade	Descrição
-Em desenvolvimento	Gestão de Agentes IA Multi-Nicho	Criação, edição e personalização completa
-Em desenvolvimento	Dashboard Financeiro	Visualização de Receita, Clientes, Planos SaaS
-Planejado	Criação Visual de Fluxos IA	Flow Builder (Drag & Drop) estilo chatbot
-Planejado	Integração com CRMs / ERPs	API Plugável com sistemas externos
-Futuro	IA com Voz Real-Time	Integração TTS/STT para voz humana
-Futuro	Analytics IA Avançado	Análises preditivas de comportamento do usuário
+
 
 🌍 Versão em Inglês
 O NextAgent-Pro está disponível em Português 🇧🇷
@@ -113,68 +109,133 @@ A plataforma oferece:
 
 ## Architect Clean & DDD 
 
+🧠 Visão Geral da Arquitetura
+ruby
+Copiar
+Editar
 apps/
-├── api/                         # Backend NestJS
-│   ├── src/
-│   │   ├── modules/
-│   │   │   ├── agents/          # Módulo de gestão de HiperAgentes IA
-│   │   │   │   ├── dto/
-│   │   │   │   ├── entities/
-│   │   │   │   ├── strategies/  # Estratégias LangChain ou IA
-│   │   │   │   ├── agents.controller.ts
-│   │   │   │   ├── agents.service.ts
-│   │   │   │   ├── agents.module.ts
-│   │   │   │   └── agents.gateway.ts (opcional socket)
-│   │   │   │
-│   │   │   ├── metrics/         # Métricas e KPIs SaaS
-│   │   │   │   ├── dto/
-│   │   │   │   ├── entities/
-│   │   │   │   ├── metrics.service.ts
-│   │   │   │   ├── metrics.controller.ts
-│   │   │   │   └── charts/      # Estratégias Nivo/Visx gerando dados
-│   │   │   │
-│   │   │   ├── logs/            # Histórico de Conversas
-│   │   │   │   ├── dto/
-│   │   │   │   ├── logs.service.ts
-│   │   │   │   └── logs.controller.ts
-│   │   │   │
-│   │   │   ├── templates/       # Templates IA e Loja
-│   │   │   │   ├── entities/
-│   │   │   │   ├── templates.controller.ts
-│   │   │   │   └── templates.service.ts
-│   │   │   │
-│   │   │   ├── whatsapp/        # Sessões WhatsApp
-│   │   │   │   ├── whatsapp.controller.ts
-│   │   │   │   ├── whatsapp.service.ts
-│   │   │   │   ├── qr-code/
-│   │   │   │   └── sessions/
-│   │   │   │
-│   │   │   ├── reports/         # Relatórios e exportações
-│   │   │   │   ├── reports.controller.ts
-│   │   │   │   └── reports.service.ts
-│   │   │   │
-│   │   │   ├── settings/        # Configurações IA + Voz + Tools
-│   │   │   │   ├── ia.config.service.ts
-│   │   │   │   └── ia.config.controller.ts
-│   │   │   │
-│   │   │   ├── finance/         # MRR, Pagamentos, Planos
-│   │   │   │   ├── finance.controller.ts
-│   │   │   │   └── finance.service.ts
-│   │   │   │
-│   │   │   ├── support/         # Suporte IA / FAQ / Vídeos
-│   │   │   │   ├── faq/
-│   │   │   │   ├── support.controller.ts
-│   │   │   │   └── support.service.ts
-│   │   │   │
-│   │   │   ├── integrations/    # CRMs / Webhooks / API Docs
-│   │   │   │   ├── integrations.controller.ts
-│   │   │   │   ├── integrations.service.ts
-│   │   │   │   └── adapters/
-│   │   │   │
-│   │   ├── shared/              # Filtros, Guards, Interceptors, etc.
-│   │   ├── main.ts
-│   │   ├── app.module.ts
-│   │   └── app.service.ts
+└── api/
+    └── src/
+        ├── main.ts                      # Bootstrap da aplicação NestJS
+        ├── app.module.ts                # Módulo raiz: importa todos os módulos globais
+        ├── app.service.ts               # Serviço global se necessário
+        ├── prisma/                      # Prisma Service (singleton para database)
+        ├── shared/                      # Pipes, Guards, Interceptors, Decorators
+        └── modules/                     # Todos os domínios (módulos) do sistema
+📦 Módulos por Domínio (camada /modules/)
+
+Módulo	Pasta	Responsabilidade
+
+ - agents	modules/agents/	CRUD de HiperAgentes IA. Possui estratégias IA (LangChain).
+ - metrics	modules/metrics/	KPIs, métricas SaaS, performance IA.
+ - finance	modules/finance/	MRR, upsells, pagamentos, planos.
+ - templates	modules/templates/	Templates IA, reuso de fluxos e loja IA.
+ - whatsapp	modules/whatsapp/	Sessões Baileys, envio/recebimento, QR, status.
+ - settings	modules/settings/	Configs de linguagem, IA tools, voz.
+ - support	modules/support/	FAQ, vídeos tutoriais, suporte IA.
+ - logs	modules/logs/	Histórico de interações IA. Logs explicáveis.
+ - dashboard	modules/dashboard/	Painel financeiro e indicadores visuais.
+ - reports	modules/reports/	Exportação, geração de relatórios.
+ - integrations	modules/integrations/	Webhooks, APIs externas, CRMs.
+ - flows	modules/flows/	(Planejado) FlowBuilder Drag-and-Drop.
+ - analytics	modules/analytics/	(Planejado) Comportamento do usuário e IA avançada.
+ - voice	modules/voice/	(Futuro) TTS/STT com voz real-time.
+ - auth	modules/auth/	Login, JWT, guards, autenticação de usuário.
+
+🌍 Lógica Global de Comunicação (camada API)
+
+Tipo	Responsabilidade
+
+ - REST API	Controllers NestJS responsáveis por rotas HTTP REST.
+ - WebSocket	Gateway de WhatsApp e status real-time (ex: whatsapp.gateway.ts).
+ - Fila Assíncrona (BullMQ)	Envio assíncrono de mensagens, uso de whatsapp.queue.ts.
+ - LangChain Engine (agents-core)	Estratégias IA, prompts dinâmicos, ferramentas IA.
+
+🧩 Shared Layer
+apps/api/src/shared/
+Contém:
+
+ - Guards → JwtAuthGuard, RolesGuard, etc.
+
+ - Interceptors → Transformar respostas, logs de execuções.
+
+ - Pipes → Validação global de DTOs.
+
+ - Decorators → Decoradores custom (ex: @CurrentUser()).
+
+🧬 Integrações Externas
+
+Integração	Lib	Descrição
+
+ - WhatsApp SDK	Baileys	Sessão multi-instância via WebSocket.
+ - Prisma ORM	@prisma/client	Data Layer multi-tenant PostgreSQL.
+ - LangChain	agents-core	IA Local com LangChain/Ollama
+ - Voice IA	(TTS/STT)	Futuro, integração com voz IA.
+ - Webhooks	REST Webhooks + queue	Integração com ERPs, CRMs.
+
+🔐 Auth Flow (auth/)
+
+auth/
+├── dto/
+├── guards/        -> JwtAuthGuard
+├── strategies/    -> JwtStrategy
+├── auth.controller.ts
+├── auth.service.ts
+Responsável por login via JWT, proteção de rotas com @UseGuards, e integração futura com RBAC.
+
+📊 Database (Prisma ORM)
+Multi-tenant: Cliente, Agente, Sessão, Mensagem, Logs, etc.
+
+ - Models com @relation, @index, @updatedAt, etc.
+ - Settings, Faq, Upsell, KpiMetric, WhatsAppSession
+
+⚙️ DevOps + Estrutura de Projeto
+
+Pasta	Descrição
+infra/terraform	Infraestrutura como código
+
+ - packages/	SDKs reutilizáveis (ex: whatsapp-sdk, agents-core)
+ - apps/web/	Painel HUD Sci-Fi com Next.js
+ - apps/api/	Backend NestJS organizado por domínios
+ - devops/github/workflows/	CI/CD (Deploy Dev, Migrate DB, Lint/Test)
+
+🚀 Pipeline de Execução API
+
+Request HTTP (ex: POST /whatsapp/:agentId/send-message)
+     ↓
+[Controller] whatsapp.controller.ts
+     ↓
+[Service] whatsapp.service.ts
+     ↓
+[UseCase] send-message.use-case.ts
+     ↓
+[Client/SDK] baileys.client.ts
+     ↓
+[Queue Opcional] BullMQ → whatsapp.queue.ts
+     ↓
+Resposta JSON
+✅ Padrões e Convenções
+
+Padrão	Uso
+
+ - DDD	Domain Driven Design (Entity, Repository, VO)
+ - Clean Architecture	Separação de domínio e infraestrutura
+ - CQRS (Opcional)	Separação de leitura/gravação
+ - DTOs	Contrato claro entre camadas
+ - Prisma	ORM com tipagem forte e migrations
+ - TurboRepo	Monorepo moderno, pacotes reutilizáveis
+ - Decorators NestJS	Para segurança e extração de contexto
+
+📌 Checklist de Modularização SaaS
+✅ Multi-Tenant Cliente, Agent, Session
+✅ Agente IA com LangChain + Contexto
+✅ WhatsApp SDK local com Baileys
+✅ IA Settings por Agente (Settings)
+✅ Métricas, MRR, Upsell → finance/, metrics/
+✅ Logs com histórico detalhado
+✅ FlowBuilder planejado
+✅ Auth + JWT guard
+✅ Integração futura com Voice, Training, Analytics
 │
 ├── web/                         # Frontend Next.js HUD
 │   ├── app/
@@ -205,6 +266,63 @@ apps/
 │   ├── whatsapp-sdk/            # SDK customizado com Baileys
 │   ├── shared-lib/              # Tipos globais + helpers
 │   └── ui/                      # Componentes visuais reutilizáveis
+
+
+🔌 Endpoints REST Ativos (Principais)
+📦 Agents
+GET /agents
+
+POST /agents
+
+GET /agents/:id
+
+PATCH /agents/:id
+
+DELETE /agents/:id
+
+🤖 IA / LangChain
+GET /ia/ask?q=...
+
+POST /ia/ask-to-agent
+
+POST /ia/flow/:agentId/start
+
+POST /ia/flow/:agentId/continue
+
+📲 WhatsApp SDK (Baileys)
+POST /whatsapp/:agentId/send-message
+
+GET /whatsapp/:agentId/sessions
+
+POST /whatsapp/:agentId/sessions/init
+
+DELETE /whatsapp/:agentId/sessions/:sessionId
+
+GET /whatsapp/:agentId/status
+
+📊 Logs
+GET /logs?agentId=xxx
+
+GET /logs/:logId
+
+DELETE /logs/:logId
+
+⚙️ Settings IA
+GET /settings/:agentId
+
+PATCH /settings/:agentId
+
+PATCH /settings/:agentId/tools
+
+PATCH /settings/:agentId/voice
+
+🧪 Debug
+GET /debug/agents/:id/status
+
+GET /debug/whatsapp/:agentId/connection
+
+GET /debug/langchain/:agentId
+
 
 
 

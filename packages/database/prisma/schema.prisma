@@ -1,17 +1,131 @@
 generator client {
   provider = "prisma-client-js"
-
 }
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Agent {
-  id        String   @id @default(uuid())
+  id        String             @id @default(uuid())
   name      String
   type      String
   phone     String
+  mensagens Mensagem[]         
+  sessions  WhatsAppSession[]  
+  settings  Settings?          @relation("AgentSettings")
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
+
+model Mensagem {
+  id        String   @id @default(uuid())
+  agentId   String
+  agent     Agent    @relation(fields: [agentId], references: [id])
+  content   String
+  date      DateTime
+  createdAt DateTime @default(now())
+}
+
+model KpiMetric {
+  id             String   @id @default(uuid())
+  date           DateTime
+  taxaConversao  Float
+  evolucao       Float[]  // Sparkline
+  createdAt      DateTime @default(now())
+}
+
+model Template {
+  id         String   @id @default(uuid())
+  nome       String
+  categoria  String
+  vendidos   Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model Cliente {
+  id         String      @id @default(uuid())
+  nome       String
+  status     String      // ativo | cancelado
+  pagamentos Pagamento[] // <- relação reversa
+  createdAt  DateTime    @default(now())
+}
+
+model Pagamento {
+  id         String   @id @default(uuid())
+  valor      Float
+  date       DateTime
+  cliente    Cliente? @relation(fields: [clienteId], references: [id])
+  clienteId  String?
+  createdAt  DateTime @default(now())
+}
+
+model Upsell {
+  id         String   @id @default(uuid())
+  produto    String
+  valor      Float
+  createdAt  DateTime @default(now())
+}
+
+model Log {
+  id        String   @id @default(uuid())
+  agentId   String
+  tipo      String   // mensagem | erro | evento
+  sucesso   Boolean
+  date      DateTime
+  createdAt DateTime @default(now())
+}
+
+model WhatsAppSession {
+  id             String   @id @default(uuid())
+  agentId        String
+  tenantId       String
+  status         String   // INITIALIZING | WAITING_QR | CONNECTED | DISCONNECTED | ERROR
+  qrCode         String?  // QR em base64 ou URL
+  connectedAt    DateTime?
+  disconnectedAt DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  agent Agent @relation(fields: [agentId], references: [id])
+
+  @@index([agentId])
+  @@index([tenantId])
+}
+
+model Settings {
+  id              String   @id @default(uuid())
+  agentId         String   @unique
+  language        String   @default("pt-BR")
+  promptBase      String
+  fallbackMessage String
+
+  tools           String[] 
+
+  voiceGender     String?  
+  voiceSpeed      Float?   
+  voiceEnabled    Boolean? @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  agent           Agent    @relation("AgentSettings", fields: [agentId], references: [id], onDelete: Cascade)
+}
+
+model Faq {
+  id        String   @id @default(uuid())
+  pergunta  String
+  resposta  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VideoTutorial {
+  id        String   @id @default(uuid())
+  titulo    String
+  url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
