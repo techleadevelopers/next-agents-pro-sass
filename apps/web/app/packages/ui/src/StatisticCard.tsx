@@ -9,6 +9,14 @@ interface StatisticCardProps {
   label: string
   description?: string
   className?: string
+  variant?: 'default' | 'success' | 'danger' | 'warning' // Suporte para temas visuais
+}
+
+const variantStyles = {
+  default: 'from-primary/20 via-accent/10 to-primary/20 border-blue-600/20',
+  success: 'from-green-500/20 via-green-400/10 to-green-500/20 border-green-600/20',
+  danger: 'from-red-500/20 via-red-400/10 to-red-500/20 border-red-600/20',
+  warning: 'from-yellow-500/20 via-yellow-400/10 to-yellow-500/20 border-yellow-600/20',
 }
 
 export default function StatisticCard({
@@ -17,6 +25,7 @@ export default function StatisticCard({
   label,
   description,
   className,
+  variant = 'default', // default para não quebrar legado
 }: StatisticCardProps) {
   return (
     <motion.div
@@ -27,8 +36,7 @@ export default function StatisticCard({
       <div
         className={cn(`
           p-4 rounded-lg
-          bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20
-          border border-blue-600/20
+          bg-gradient-to-br ${variantStyles[variant]}
           shadow-[0_0_12px_rgba(134,206,235,0.2),0_0_24px_rgba(134,206,235,0.1)]
           backdrop-blur-md backdrop-saturate-150
           flex items-center justify-between

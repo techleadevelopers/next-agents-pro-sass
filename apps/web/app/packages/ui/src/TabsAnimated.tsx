@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
-interface TabsAnimatedProps {
+export interface TabsAnimatedProps {
   tabs: { label: string; value: string }[]
   defaultTab: string
   onTabChange?: (tab: string) => void
@@ -22,11 +23,12 @@ const TabsAnimated = ({ tabs, defaultTab, onTabChange }: TabsAnimatedProps) => {
         <button
           key={tab.value}
           onClick={() => handleTabClick(tab.value)}
-          className={`px-4 py-2 rounded-lg transition-all ${
+          className={cn(
+            'px-4 py-2 rounded-lg transition-all',
             activeTab === tab.value
               ? 'bg-primary text-white'
               : 'bg-muted text-foreground/60'
-          }`}
+          )}
         >
           {tab.label}
         </button>

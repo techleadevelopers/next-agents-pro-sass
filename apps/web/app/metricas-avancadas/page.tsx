@@ -1,10 +1,7 @@
-// apps/web/app/configuracoes-gerais/page.tsx
+'use client'
 
-export default function MetricasAvancadas() {
-    return (
-      <div>
-        <h1>Configurações Gerais</h1>
-      </div>
-    )
-  }
-  
+import MetricasAvancadasContainer from './containers/MétricasAvançadas.container'
+
+export default function MetricasAvancadasPage() {
+  return <MetricasAvancadasContainer />
+}

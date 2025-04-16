@@ -1,10 +1,7 @@
-// apps/web/app/configuracoes-gerais/page.tsx
+'use client'
 
-export default function ConfiguracoesGeraisPage() {
-    return (
-      <div>
-        <h1>Configurações Gerais</h1>
-      </div>
-    )
-  }
-  
+import TemplatesDeFluxoIAContainer from './containers/TemplatesDeFluxoIA.container'
+
+export default function TemplatesDeFluxoIAPage() {
+  return <TemplatesDeFluxoIAContainer />
+}

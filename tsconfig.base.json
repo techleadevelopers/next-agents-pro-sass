@@ -1,21 +1,49 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@nextagent-pro/database/*": ["packages/database/*"],
-        "@nextagent-pro/generated/*": ["packages/generated/*"],
-        "@nextagent-pro/agents-core/*": ["packages/agents-core/src/*"],
-        "@nextagent-pro/whatsapp-sdk/*": ["packages/whatsapp-sdk/*"]
-      },
-      "module": "commonjs",
-      "target": "ES2023",
-      "strict": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "allowSyntheticDefaultImports": true,
-      "forceConsistentCasingInFileNames": true
-    }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // Core Back-End
+      "@nextagent-pro/database/*": ["packages/database/*"],
+      "@nextagent-pro/generated/*": ["packages/generated/*"],
+      "@nextagent-pro/agents-core/*": ["packages/agents-core/src/*"],
+      "@nextagent-pro/whatsapp-sdk/*": ["packages/whatsapp-sdk/*"],
+
+      // Shared UI / Design System
+      "@ui/*": ["packages/ui/src/*"],
+
+      // Hooks Globais Reutilizáveis
+      "@hooks/*": ["apps/web/src/hooks/*"],
+
+      // Utils Globais
+      "@utils/*": ["apps/web/src/utils/*"],
+
+      // Componentes Front Web Local
+      "@components/*": ["apps/web/src/components/*"],
+
+      // Layout / Templates Frontend
+      "@layout/*": ["apps/web/src/layout/*"],
+
+      // Libs Específicas / SDK Clients
+      "@lib/*": ["apps/web/src/lib/*"],
+
+      // Stores / Zustand / Contextos
+      "@store/*": ["apps/web/src/store/*"],
+
+      // Assets (Icons, Imagens, SVG)
+      "@assets/*": ["apps/web/src/assets/*"],
+
+      // Configurações / Variáveis Globais
+      "@config/*": ["apps/web/src/config/*"]
+    },
+
+    "module": "commonjs",
+    "target": "ES2023",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
   }
-  
+}

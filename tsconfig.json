@@ -1,12 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@nextagent-pro/database/*": ["packages/database/*"],
-      "@nextagent-pro/generated/*": ["packages/generated/*"],
-      "@nextagent-pro/agents-core/*": ["packages/agents-core/src/*"],
-      "@nextagent-pro/whatsapp-sdk/*": ["packages/whatsapp-sdk/*"]
-    }
+    "baseUrl": "."
   }
 }

@@ -26,14 +26,6 @@ export default function ChartContainer({
 }: ChartContainerProps) {
   return (
     <motion.div
-      className={cn(
-        `w-full rounded-lg border border-border shadow 
-        bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 
-        p-6 backdrop-blur-md backdrop-saturate-150 
-        shadow-[0_0_12px_rgba(134,206,235,0.2),0_0_24px_rgba(134,206,235,0.1)]
-        animate-fadeIn transition-all duration-500`,
-        className
-      )}
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7 }}

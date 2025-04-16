@@ -111,6 +111,103 @@ A plataforma oferece:
 
 ---
 
+## Architect Clean & DDD 
+
+apps/
+├── api/                         # Backend NestJS
+│   ├── src/
+│   │   ├── modules/
+│   │   │   ├── agents/          # Módulo de gestão de HiperAgentes IA
+│   │   │   │   ├── dto/
+│   │   │   │   ├── entities/
+│   │   │   │   ├── strategies/  # Estratégias LangChain ou IA
+│   │   │   │   ├── agents.controller.ts
+│   │   │   │   ├── agents.service.ts
+│   │   │   │   ├── agents.module.ts
+│   │   │   │   └── agents.gateway.ts (opcional socket)
+│   │   │   │
+│   │   │   ├── metrics/         # Métricas e KPIs SaaS
+│   │   │   │   ├── dto/
+│   │   │   │   ├── entities/
+│   │   │   │   ├── metrics.service.ts
+│   │   │   │   ├── metrics.controller.ts
+│   │   │   │   └── charts/      # Estratégias Nivo/Visx gerando dados
+│   │   │   │
+│   │   │   ├── logs/            # Histórico de Conversas
+│   │   │   │   ├── dto/
+│   │   │   │   ├── logs.service.ts
+│   │   │   │   └── logs.controller.ts
+│   │   │   │
+│   │   │   ├── templates/       # Templates IA e Loja
+│   │   │   │   ├── entities/
+│   │   │   │   ├── templates.controller.ts
+│   │   │   │   └── templates.service.ts
+│   │   │   │
+│   │   │   ├── whatsapp/        # Sessões WhatsApp
+│   │   │   │   ├── whatsapp.controller.ts
+│   │   │   │   ├── whatsapp.service.ts
+│   │   │   │   ├── qr-code/
+│   │   │   │   └── sessions/
+│   │   │   │
+│   │   │   ├── reports/         # Relatórios e exportações
+│   │   │   │   ├── reports.controller.ts
+│   │   │   │   └── reports.service.ts
+│   │   │   │
+│   │   │   ├── settings/        # Configurações IA + Voz + Tools
+│   │   │   │   ├── ia.config.service.ts
+│   │   │   │   └── ia.config.controller.ts
+│   │   │   │
+│   │   │   ├── finance/         # MRR, Pagamentos, Planos
+│   │   │   │   ├── finance.controller.ts
+│   │   │   │   └── finance.service.ts
+│   │   │   │
+│   │   │   ├── support/         # Suporte IA / FAQ / Vídeos
+│   │   │   │   ├── faq/
+│   │   │   │   ├── support.controller.ts
+│   │   │   │   └── support.service.ts
+│   │   │   │
+│   │   │   ├── integrations/    # CRMs / Webhooks / API Docs
+│   │   │   │   ├── integrations.controller.ts
+│   │   │   │   ├── integrations.service.ts
+│   │   │   │   └── adapters/
+│   │   │   │
+│   │   ├── shared/              # Filtros, Guards, Interceptors, etc.
+│   │   ├── main.ts
+│   │   ├── app.module.ts
+│   │   └── app.service.ts
+│
+├── web/                         # Frontend Next.js HUD
+│   ├── app/
+│   │   ├── gestao-de-agentes/
+│   │   │   ├── ListaDeAgentes.tsx
+│   │   │   ├── CriarNovoAgente.tsx
+│   │   │   ├── api.ts           # Conecta com /agents do backend
+│   │   │   └── hooks.ts
+│   │   ├── metricas-avancadas/
+│   │   ├── historico-de-conversas/
+│   │   ├── templates-de-fluxo-ia/
+│   │   ├── loja-templates-ia/
+│   │   ├── relatorios/
+│   │   ├── financeiro/
+│   │   ├── kpis-saas/
+│   │   ├── configuracoes-avancadas-ia/
+│   │   ├── suporte-central-ajuda/
+│   │   ├── controle-de-sessoes-whatsapp/
+│   │   └── integracoes/
+│   ├── components/
+│   │   ├── global/              # ChartContainer, ChartLoader, etc.
+│   │   └── charts/              # DonutChartIA, LineChartCustom etc.
+│   └── utils/                   # api.ts, constants.ts
+│
+├── packages/
+│   ├── agents-core/             # IA local com LangChain/Ollama
+│   ├── database/                # Prisma ORM schema + client
+│   ├── whatsapp-sdk/            # SDK customizado com Baileys
+│   ├── shared-lib/              # Tipos globais + helpers
+│   └── ui/                      # Componentes visuais reutilizáveis
+
+
+
 ## Tecnologias Usadas
 
 A stack tecnológica do `next-agent-pro` foi pensada para performance, organização profissional e flexibilidade em integrações IA.
@@ -273,6 +370,145 @@ AWS / Render / Railway	Provedor Cloud (a ser definido)
 GitHub Actions	Automação DevOps CI/CD
 PostgreSQL	Banco de dados gerenciado
 Prisma ORM	Migrations automatizadas via pipeline
+
+📦 Mapa Completo dos Componentes NextAgent-Pro
+1. Componentes Globais (@nextagent-pro/ui)
+Esses ficam em packages/ui/ e são usados em todo o projeto:
+
+
+Componente Global	Função Principal
+ChartContainer.tsx	Wrapper Visual Gráficos Sci-Fi
+ChartLoader.tsx	Skeleton Loader Gráfico HUD
+DataTableCustom.tsx	Tabela Avançada Multi-Level
+KPIChartCard.tsx	Card KPI Financeiro Visual
+ProgressCircular.tsx	Loader Circular Futurista
+SectionTitle.tsx	Título Global Sci-Fi com Badge
+SegmentedControl.tsx	Filtros Visuais UX
+TabsAnimated.tsx	Abas Navegação Animadas
+ButtonExport.tsx	Botão Exportação CSV/PDF
+BadgeStatus.tsx	Badge Status Operacional IA
+ROIChart.tsx	Chart ROI (Nivo Bump)
+ExportDropdown.tsx	Dropdown Exportação Multi-formato
+AccordionCustom.tsx	FAQ Interativo UI
+CardVideo.tsx	Card para Exibição de Vídeos
+EmptyState.tsx	Estado Vazio Visual UX
+StatisticCard.tsx	Card Numérico Resumido UI
+2. Charts Específicos (charts/)
+Esses charts são usados de forma específica em cada módulo:
+
+
+Chart File	Descrição Chart
+BarChartCustom.tsx	Bar Chart Horizontal Customizado
+DonutChartIA.tsx	Donut Chart IA Status
+FlowSankeyChart.tsx	Sankey Chart Automação IA
+HeatmapConversas.tsx	Heatmap Visx Logs de Conversa
+LineChartCustom.tsx	Line Chart Multi-Series Custom
+PieChartFinanceiro.tsx	Pie Chart Financeiro Mix
+TimelineChart.tsx	Timeline Chart Logs Conversas
+3. Componentes Locais por Módulo (App)
+app/configuracoes-gerais/
+
+Componentes Locais
+ConfiguracoesMultiTenant.tsx
+SalvarAlteracoes.tsx
+app/controle-de-sessoes-whatsapp/
+
+Componentes Locais
+GerarQRCode.tsx
+LogsDeSessao.tsx
+NavbarWhatsApp.tsx
+StatusDeSessao.tsx
+app/dashboard/
+
+Componentes Locais
+DashboardResultadosFinanceiros.tsx
+Graficos.tsx
+HeroResumoOperacoes.tsx
+KPIs.tsx
+Navbar.tsx
+NavbarDashboard.tsx
+PieChart.tsx
+TabelaDesempenho.tsx
+app/gestao-de-agentes/
+
+Componentes Locais
+CriarNovoAgente.tsx
+EditarAgente.tsx
+ListaDeAgentes.tsx
+app/historico-de-conversas/
+
+Componentes Locais
+FiltrarLogs.tsx
+LogsDeConversas.tsx
+app/metricas-avancadas/
+
+Componentes Locais
+GraficoMensagensPorPeriodo.tsx
+PerformancePorAgente.tsx
+TabelaKPIConversao.tsx
+app/permissoes-e-usuarios/
+
+Componentes Locais
+EditarUsuario.tsx
+TelaDeCriacaoDeUsuario.tsx
+app/relatorios/
+
+Componentes Locais
+GerarRelatorio.tsx
+RelatoriosDetalhados.tsx
+app/templates-de-fluxo-ia/
+
+Componentes Locais
+AdicionarTemplate.tsx
+BibliotecaDeTemplates.tsx
+app/loja-templates-ia/
+
+Componentes Locais
+CardTemplateIA.tsx
+DetalhesTemplate.tsx
+ComprarTemplate.tsx
+app/integracoes/
+
+Componentes Locais
+IntegraCRMs.tsx
+WebhooksCustomizados.tsx
+APIDocumentation.tsx
+app/configuracoes-avancadas-ia/
+
+Componentes Locais
+EditarTomDeVoz.tsx
+UploadDocsTreinamento.tsx
+RegrasAutomacaoPorNicho.tsx
+app/financeiro/
+
+Componentes Locais
+MeusPlanosAtuais.tsx
+HistoricoDePagamentos.tsx
+UpgradeDowngradePlano.tsx
+app/kpis-saas/
+
+Componentes Locais
+MRRChart.tsx
+RetencaoChurn.tsx
+UpsellMetrics.tsx
+app/suporte-central-ajuda/
+
+Componentes Locais
+FAQInterativo.tsx
+ChatSuporteIA.tsx
+VideoTutoriais.tsx
+
+4. Utils Globais (utils/)
+api.ts	Funções Auxiliares API Rest
+constants.ts	Constantes Globais do Projeto
+
+
+
+Componentes Globais UI	16	Alta Reutilização UX
+Charts Locais	8	Gráficos Específicos Nivo / Visx
+Componentes Locais	60+	Componentes Únicos de Contexto
+Utils Globais	2	Helpers API / Constantes
+
 
 Estrutura de Pastas
 infra/

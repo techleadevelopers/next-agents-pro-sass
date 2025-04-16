@@ -7,12 +7,15 @@ interface ProgressCircularProps {
   value: number // valor de 0 a 100
   label?: string
   size?: number
+  className?: string // 👈 adicionar isso se quiser permitir estilos externos
+  description?: string // <- NOVO
 }
 
 export default function ProgressCircular({
   value,
   label = 'Progresso',
   size = 120,
+  description, // <- NOVO
 }: ProgressCircularProps) {
   const strokeWidth = 10
   const center = size / 2
@@ -25,6 +28,7 @@ export default function ProgressCircular({
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
+     
     >
       <svg
         width={size}
@@ -61,7 +65,7 @@ export default function ProgressCircular({
         </defs>
       </svg>
 
-      <div>
+      <div className="text-center mt-2">
         <div
           className="
             text-2xl font-extrabold text-white
@@ -73,6 +77,9 @@ export default function ProgressCircular({
         <div className="text-xs text-muted-foreground tracking-wide uppercase">
           {label}
         </div>
+        {description && (
+          <div className="text-[10px] text-foreground/50 mt-1">{description}</div>
+        )}
       </div>
     </motion.div>
   )

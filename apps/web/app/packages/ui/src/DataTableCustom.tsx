@@ -7,6 +7,7 @@ interface DataTableCustomProps extends TableHTMLAttributes<HTMLTableElement> {
   columns: string[]
   data: any[]
   emptyMessage?: string
+  onRowClick?: (row: any) => void // <- Está correto
 }
 
 export default function DataTableCustom({
@@ -14,6 +15,7 @@ export default function DataTableCustom({
   data,
   emptyMessage = 'Nenhum dado encontrado.',
   className,
+  onRowClick, // <- Pegar aqui
   ...props
 }: DataTableCustomProps) {
   return (
@@ -34,6 +36,7 @@ export default function DataTableCustom({
             ))}
           </tr>
         </thead>
+
         <tbody>
           {data.length === 0 ? (
             <tr>
@@ -45,7 +48,8 @@ export default function DataTableCustom({
             data.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className="hover:bg-accent/10 transition duration-200 border-b border-border"
+                className="hover:bg-accent/10 transition duration-200 border-b border-border cursor-pointer" // <- Adiciona cursor-pointer
+                onClick={() => onRowClick?.(row)} // <- Aqui o click por linha
               >
                 {columns.map((col, colIndex) => (
                   <td key={colIndex} className="px-4 py-2">

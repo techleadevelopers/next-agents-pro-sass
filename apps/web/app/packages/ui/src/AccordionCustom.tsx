@@ -27,16 +27,16 @@ export default function AccordionCustom({ items, className }: AccordionCustomPro
       {items.map((item, index) => (
         <div
           key={index}
-          className="
-            border border-muted/20 rounded-lg backdrop-blur-md p-4
-            bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10
-            shadow-[0_0_12px_rgba(134,206,235,0.1)]
-            cursor-pointer
-          "
+          className="border border-muted/20 rounded-lg backdrop-blur-md p-4
+                     bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10
+                     shadow-[0_0_12px_rgba(134,206,235,0.1)] cursor-pointer"
           onClick={() => toggle(index)}
         >
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold tracking-wide text-foreground">{item.question}</h3>
+            <h3 className="text-sm font-bold tracking-wide text-foreground">
+              {item.question}
+            </h3>
+
             <motion.div
               animate={{ rotate: activeIndex === index ? 180 : 0 }}
               transition={{ duration: 0.3 }}
@@ -51,9 +51,10 @@ export default function AccordionCustom({ items, className }: AccordionCustomPro
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="overflow-hidden mt-2 text-sm text-muted-foreground"
               >
-                {item.answer}
+                <div className="overflow-hidden mt-2 text-sm text-muted-foreground">
+                  {item.answer}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

@@ -17,7 +17,7 @@ export default function ROIChart({ data, title = 'Crescimento de ROI' }: ROIChar
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7 }}
-      className="bg-card p-4 rounded-lg shadow border border-border"
+      
     >
       <h3 className="text-lg font-extrabold mb-2 text-foreground bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
         {title}

@@ -1,10 +1,9 @@
-// apps/web/app/configuracoes-gerais/page.tsx
+// apps/web/app/relatorios/page.tsx
 
-export default function ConfiguracoesGeraisPage() {
-    return (
-      <div>
-        <h1>Configurações Gerais</h1>
-      </div>
-    )
-  }
-  
+'use client'
+
+import RelatoriosContainer from './containers/Relatórios.container'
+
+export default function RelatoriosPage() {
+  return <RelatoriosContainer />
+}
