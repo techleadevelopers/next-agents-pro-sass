@@ -1,4 +1,15 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateAgentDto } from './create-agent.dto';
+import { IsOptional, IsString } from 'class-validator';
 
-export class UpdateAgentDto extends PartialType(CreateAgentDto) {}
+export class UpdateAgentDto {
+  @IsOptional()
+  @IsString()
+  name?: string;
+
+  @IsOptional()
+  @IsString()
+  promptBase?: string;
+
+  @IsOptional()
+  @IsString()
+  type?: string;
+}

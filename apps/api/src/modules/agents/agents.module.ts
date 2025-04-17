@@ -1,11 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AgentsService } from './agents.service';
-import { AgentsController } from './agents.controller';
-import { PrismaModule } from '../../prisma/prisma.module'; // Caminho correto!
+import { AgentController } from './agents.controller';
+import { AgentService } from './agents.service';
+import { AgentRepository } from './agent.repository';
+import { PrismaModule } from '../../prisma/prisma.module';
+import { AgentLangchainService } from './langchain/agent-langchain.service';
+import { EmbeddingsService } from './langchain/embeddings.service';
 
 @Module({
   imports: [PrismaModule],
-  controllers: [AgentsController],
-  providers: [AgentsService],
+  controllers: [AgentController],
+  providers: [
+    AgentService,
+    AgentRepository,
+    AgentLangchainService,
+    EmbeddingsService,
+  ],
 })
-export class AgentsModule {}
+export class AgentModule {}

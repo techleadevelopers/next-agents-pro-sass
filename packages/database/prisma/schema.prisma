@@ -12,12 +12,19 @@ model Agent {
   name      String
   type      String
   phone     String
+  tenantId  String             // ← Obrigatório agora (multi-tenant)
+  
   mensagens Mensagem[]         
   sessions  WhatsAppSession[]  
   settings  Settings?          @relation("AgentSettings")
+
+  documentosTreinados DocumentoTreinado[]  // ← Vetores e Docs IA
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
+
+  @@index([tenantId])          // ← Performance para queries por tenant
 }
+
 
 
 model Mensagem {
@@ -50,6 +57,7 @@ model Cliente {
   nome       String
   status     String      // ativo | cancelado
   pagamentos Pagamento[] // <- relação reversa
+  assinaturas  Assinatura[]  // ← ADICIONAR ISSO
   createdAt  DateTime    @default(now())
 }
 
@@ -59,6 +67,7 @@ model Pagamento {
   date       DateTime
   cliente    Cliente? @relation(fields: [clienteId], references: [id])
   clienteId  String?
+  tenantId   String   // ← ESTA LINHA AQUI É O QUE GERA O 'where: { tenantId }'
   createdAt  DateTime @default(now())
 }
 
@@ -66,7 +75,9 @@ model Upsell {
   id         String   @id @default(uuid())
   produto    String
   valor      Float
+  tenantId   String       // 👈 Adiciona isso aqui
   createdAt  DateTime @default(now())
+  @@index([tenantId])     // 👈 Opcional, melhora performance multi-tenant
 }
 
 model Log {
@@ -128,4 +139,77 @@ model VideoTutorial {
   url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Plano {
+  id          String   @id @default(uuid())
+  nome        String
+  preco       Float
+  recursos    String[]  // ex: ["5 agentes", "chat ilimitado"]
+  ativo       Boolean   @default(true)
+  assinaturas  Assinatura[]   // ← ADICIONE ESTA LINHA
+  createdAt   DateTime  @default(now())
+}
+
+model Assinatura {
+  id         String   @id @default(uuid())
+  clienteId  String
+  cliente    Cliente  @relation(fields: [clienteId], references: [id]) // ✅ Correto agora
+  planoId    String
+  plano      Plano    @relation(fields: [planoId], references: [id])   // ✅ Correto agora
+  status     String   // ativo, cancelado, trial
+  dataInicio DateTime
+  dataFim    DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model DocumentoTreinado {
+  id        String   @id @default(uuid())
+  agentId   String
+  tenantId  String
+  filename  String
+  mimetype  String
+  tamanho   Int
+  origem    String   // "pdf" | "csv" | etc
+  conteudo  String   // texto extraído
+  criadoEm  DateTime @default(now())
+
+  agent     Agent    @relation(fields: [agentId], references: [id])
+  vetores   VetorDocumento[]            // <- ADICIONE ESTA LINHA
+
+  @@index([agentId])
+  @@index([tenantId])
+}
+
+
+model VetorDocumento {
+  id            String   @id @default(uuid())
+  documentoId   String
+  embedding     Bytes    // ou String[], depende do provider
+  conteudoChunk String
+  ordem         Int
+
+  documento     DocumentoTreinado @relation(fields: [documentoId], references: [id])
+
+  @@index([documentoId])
+}
+
+model FaturaMensal {
+  id         String   @id @default(uuid())
+  tenantId   String
+  mesRef     String   // ex: "04/2025"
+  valorTotal Float
+  status     String   // "paga" | "pendente" | "vencida"
+  dataVenc   DateTime
+  createdAt  DateTime @default(now())
+}
+
+model KpiFinance {
+  id         String   @id @default(uuid())
+  tenantId   String
+  mrr        Float
+  churnRate  Float
+  receitaHoje Float
+  dataRef    DateTime
 }

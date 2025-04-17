@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 
 // Módulos principais da aplicação
-import { AgentsModule } from './modules/agents/agents.module';
+import { AgentModule } from './modules/agents/agents.module';
 import { MetricsModule } from './modules/metrics/metrics.module';
 import { FinanceModule } from './modules/finance/finance.module';
 import { TemplatesModule } from './modules/template/templates.module';
@@ -19,13 +19,16 @@ import { WhatsAppModule } from './modules/whatsapp/whatsapp.module';
 // Novos módulos
 import { SupportModule } from './modules/support/support.module';
 import { SettingsModule } from './modules/settings/settings.module';
-import { FlowsModule } from './modules/flows/flows.module';           // ✅ novo
-import { AnalyticsModule } from './modules/analytics/analytics.module'; // ✅ novo
+import { FlowsModule } from './modules/flows/flows.module';
+import { AnalyticsModule } from './modules/analytics/analytics.module';
+import { VoiceModule } from './modules/voice/voice.module';           // ✅ novo
+import { BillingModule } from './modules/billing/billing.module';     // ✅ novo
+import { DebugModule } from './modules/debug/debug.module';
 
 @Module({
   imports: [
     PrismaModule,
-    AgentsModule,
+    AgentModule,
     MetricsModule,
     FinanceModule,
     TemplatesModule,
@@ -36,8 +39,11 @@ import { AnalyticsModule } from './modules/analytics/analytics.module'; // ✅ n
     WhatsAppModule,
     SupportModule,
     SettingsModule,
-    FlowsModule,       // ✅ integrado
-    AnalyticsModule,   // ✅ integrado
+    FlowsModule,
+    AnalyticsModule,
+    VoiceModule,   
+    BillingModule,   
+    DebugModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

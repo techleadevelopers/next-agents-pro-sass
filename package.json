@@ -10,6 +10,8 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/multer": "^1.4.12",
     "prettier": "^3.5.3",
     "turbo": "^2.5.0",
     "typescript": "5.8.2"
@@ -21,5 +23,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "express": "^5.1.0",
+    "multer": "^1.4.5-lts.2"
+  }
 }

@@ -1,29 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { AgentRepository } from './agent.repository';
 import { CreateAgentDto } from './dto/create-agent.dto';
 import { UpdateAgentDto } from './dto/update-agent.dto';
 
 @Injectable()
-export class AgentsService {
-  constructor(private readonly prisma: PrismaService) {}
+export class AgentService {
+  constructor(private repo: AgentRepository) {}
 
-  create(data: CreateAgentDto) {
-    return this.prisma.agent.create({ data });
+  create(dto: CreateAgentDto, tenantId: string) {
+    return this.repo.create({ ...dto, tenantId });
   }
 
-  findAll() {
-    return this.prisma.agent.findMany();
+  findAll(tenantId: string) {
+    return this.repo.findManyByTenant(tenantId); // ✅ Atualizado
   }
 
   findOne(id: string) {
-    return this.prisma.agent.findUnique({ where: { id } });
+    return this.repo.findById(id);
   }
 
-  update(id: string, data: UpdateAgentDto) {
-    return this.prisma.agent.update({ where: { id }, data });
+  update(id: string, dto: UpdateAgentDto) {
+    return this.repo.update(id, dto);
   }
 
   remove(id: string) {
-    return this.prisma.agent.delete({ where: { id } });
+    return this.repo.delete(id);
   }
 }

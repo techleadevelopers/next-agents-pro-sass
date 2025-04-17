@@ -3,8 +3,12 @@
   "compilerOptions": {
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "typeRoots": ["./src/types", "./node_modules/@types"], // <- importante apontar para onde você criar o types/
+    "incremental": true,
+    "strict": true, // Recomendado pra garantir tipagem rigorosa
+    "esModuleInterop": true, // Suporte completo a libs tipo pdf-parse
+    "resolveJsonModule": true // Caso use arquivos .json importados
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/types/**/*.d.ts"], // Inclui definições de tipos custom
   "exclude": ["node_modules", "dist"]
 }
