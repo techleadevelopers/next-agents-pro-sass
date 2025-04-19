@@ -23,7 +23,7 @@ const KPIs = () => {
       {...({ className: `
         grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4
         bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20
-        border border-blue-400/20
+        border border-cyan-400/20
         backdrop-blur-md backdrop-saturate-150
         p-6 rounded-lg animate-fadeIn animate-gradient-x
       ` } as HTMLMotionProps<'div'>)}
@@ -44,7 +44,7 @@ const KPIs = () => {
               className="
                 rounded-lg
                 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20
-                border border-blue-600/20
+                border border-cyan-600/20
                 shadow-[0_0_12px_rgba(134,206,235,0.2),0_0_24px_rgba(134,206,235,0.1)]
                 backdrop-blur-md backdrop-saturate-150
                 animate-[hudPulse_3s_infinite] transition-all

@@ -17,15 +17,18 @@ export default function DashboardPage() {
       <section className="flex-1 p-8 bg-background text-foreground overflow-y-auto">
         <div className="max-w-7xl mx-auto space-y-8">
 
-          <header className="space-y-4 text-center">
-            <h1 className="text-4xl font-extrabold tracking-tight leading-tight animate-fadeIn bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Dashboard NexAgent-Pro
-            </h1>
+          {/*
+<header className="space-y-4 text-center">
+  <h1 className="text-4xl font-extrabold tracking-tight leading-tight animate-fadeIn bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+    Dashboard NexAgent-Pro
+  </h1>
 
-            <p className="text-muted-foreground text-lg leading-relaxed text-balance">
-              Painel de gerenciamento dos HyperAgentes IA locais com automação via WhatsApp.
-            </p>
-          </header>
+  <p className="text-muted-foreground text-lg leading-relaxed text-balance">
+    Painel de gerenciamento dos HyperAgentes IA locais com automação via WhatsApp.
+  </p>
+</header>
+*/}
+
 
           <div className="animate-fadeIn delay-100">
             <DashboardGeralContainer />

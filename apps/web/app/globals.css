@@ -41,50 +41,102 @@ a {
 @layer base {
   :root {
     /* Cores Padrão Light */
-    --background: #f7f7f7;    /* Cinza Claro */
-    --foreground: #333333;    /* Preto */
-    --primary: #4682b4;       /* Azul */
-    --secondary: #7a288a;     /* Roxo */
+    --background: #f7f7f7;
+    --foreground: #333333;
+    --primary: #4682b4;
+    --secondary: #7a288a;
 
     /* Cores Gráficos */
-    --chart-1: #4567b7; 
-    --chart-2: #7a288a; 
-    --chart-3: #87ceeb; 
-    --chart-4: #c7b8ea; 
-    --chart-5: #ffffff; 
+    --chart-1: #4567b7;
+    --chart-2: #7a288a;
+    --chart-3: #87ceeb;
+    --chart-4: #c7b8ea;
+    --chart-5: #ffffff;
 
     /* Radius Global */
     --radius: 0.5rem;
 
     /* Cor Borda Global */
-    --border: #e5e7eb; /* Tailwind gray-200 */
+    --border: #e5e7eb;
   }
 
   /* Modo Dark */
   .dark {
-    --background: #333333; 
-    --foreground: #f7f7f7; 
-    --primary: #f7f7f7;    
-    --secondary: #333333; 
+    --background: #333333;
+    --foreground: #f7f7f7;
+    --primary: #f7f7f7;
+    --secondary: #333333;
 
-    /* Cores Gráficos Dark Mode */
     --chart-1: #220 70% 50%;
     --chart-2: #160 60% 45%;
     --chart-3: #30 80% 55%;
     --chart-4: #280 65% 60%;
     --chart-5: #340 75% 55%;
 
-    --border: #444444; /* Cinza escuro */
+    --border: #444444;
   }
 }
 
 /* Estilização Base Global */
 @layer base {
   * {
-    border-color: var(--border); /* Corrigindo o problema do border-border */
+    border-color: var(--border);
   }
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* ========================= */
+/* Sombras personalizadas H1 */
+/* ========================= */
+@layer components {
+  .shadow-elegant {
+    text-shadow:
+      1px -1px 0 #767676,
+      -1px 2px 1px #737272,
+      -2px 4px 1px #767474,
+      -3px 6px 1px #787777,
+      -4px 8px 1px #7b7a7a,
+      -5px 10px 1px #7f7d7d,
+      -6px 12px 1px #828181,
+      -7px 14px 1px #868585,
+      -8px 16px 1px #8b8a89,
+      -9px 18px 1px #8f8e8d,
+      -10px 20px 1px #949392;
+  }
+
+  .shadow-deep {
+    text-shadow:
+      0 -1px 0 #fff,
+      0 1px 0 #2e2e2e,
+      0 2px 0 #2c2c2c,
+      0 3px 0 #2a2a2a,
+      0 4px 0 #282828,
+      0 5px 0 #262626,
+      0 6px 0 #242424,
+      0 7px 0 #222,
+      0 8px 0 #202020,
+      0 9px 0 #1e1e1e,
+      0 10px 0 #1c1c1c,
+      0 11px 0 #1a1a1a,
+      0 12px 0 #181818,
+      0 13px 0 #161616,
+      0 14px 0 #141414,
+      0 15px 0 #121212,
+      0 22px 30px rgba(0, 0, 0, 0.9);
+  }
+
+  .shadow-inset {
+    text-shadow:
+      -1px -1px 1px #111,
+      2px 2px 1px #363636;
+  }
+
+  .shadow-retro {
+    text-shadow:
+      4px 4px 0px #d5d5d5,
+      7px 7px 0px rgba(0, 0, 0, 0.2);
   }
 }

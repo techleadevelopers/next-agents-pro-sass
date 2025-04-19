@@ -1,317 +1,216 @@
-import React, { useState, useEffect } from 'react';
-import { MoreHorizontal } from 'lucide-react';
+'use client'
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
-} from '@/components/gestão-de-agentes/ui/tooltip';
+import React, { useEffect, useState } from 'react'
+import { FaRobot, FaDownload, FaCopy, FaPlus } from 'react-icons/fa'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip'
+import { CheckCircle, Loader2, XCircle } from 'lucide-react'
+import CriarNovoAgente from './CriarNovoAgente'
+import { Agente, AgenteNovo } from '../types/agente'
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/gestão-de-agentes/ui/dropdown-menu';
-
-import { Badge } from '@/components/gestão-de-agentes/ui/badge';
-import { Button } from '@/components/gestão-de-agentes/button';
-
-interface Agente {
-  id: string;
-  nome: string;
-  tipo: string;
-  status: 'ativo' | 'inativo' | 'em configuração' | 'erro';
-  historico?: string[];
-  configuracoes?: string[];
+type Props = {
+  agentes: Agente[]
+  onVerDetalhes: (id: string) => void
+  onExportar: (id: string) => void
+  onDuplicar: (id: string) => void
+  onAtivarDesativar: (id: string) => void
+  onCriarNovoAgente: (agente: AgenteNovo) => void
 }
 
-interface ListaDeAgentesProps {
-  agentes: Agente[];
-  onEditar: (id: string) => void;
-  onExcluir: (id: string) => void;
-  onAtivarDesativar: (id: string) => void;
-  onCriarNovoAgente: () => void;
-}
-
-const ListaDeAgentes = ({
+export default function ListaDeAgentes({
   agentes,
-  onEditar,
-  onExcluir,
+  onVerDetalhes,
+  onExportar,
+  onDuplicar,
   onAtivarDesativar,
   onCriarNovoAgente
-}: ListaDeAgentesProps) => {
-  const [animacao, setAnimacao] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+}: Props) {
+  const [animado, setAnimado] = useState(false)
+  const [showNovoAgente, setShowNovoAgente] = useState(false)
 
   useEffect(() => {
-    // Simula um carregamento inicial
-    setIsLoading(true);
-    setTimeout(() => {
-      setAnimacao(true);
-      setIsLoading(false);
-    }, 500);
-  }, []);
+    setTimeout(() => setAnimado(true), 300)
+  }, [])
 
-  // Renderiza o estado de carregamento
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-48">
-        <p className="text-lg font-medium text-gray-600">Carregando...</p>
-      </div>
-    );
-  }
-
-  // Renderiza em caso de erro
-  if (error) {
-    return (
-      <div className="flex items-center justify-center h-48">
-        <p className="text-lg font-medium text-red-500">{error}</p>
-      </div>
-    );
+  const getStatusIcon = (status: Agente['sessaoWhatsapp']) => {
+    switch (status) {
+      case 'ONLINE':
+        return <CheckCircle className="w-4 h-4 text-emerald-500" />
+      case 'LOADING_QR':
+        return <Loader2 className="w-4 h-4 animate-spin text-emerald-500" />
+      case 'OFFLINE':
+        return <XCircle className="w-4 h-4 text-gray-400" />
+      case 'ERRO':
+        return <XCircle className="w-4 h-4 text-red-500" />
+      default:
+        return null
+    }
   }
 
   return (
-    <div
-      className={`max-w-6xl mx-auto p-6 rounded-lg ${
-        animacao ? 'animate-fadeIn' : 'opacity-0'
-      } transition-all duration-1000`}
-    >
-      <h2
-        className="
-          text-3xl 
-          font-extrabold 
-          tracking-tight 
-          leading-tight 
-          text-center
-          border-b border-blue-400 pb-2
-          bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent
-          animate-gradient-x
-        "
+    <TooltipProvider delayDuration={200}>
+      <div
+        className={cn(
+          'w-[86em]',
+          'relative',
+          'right-[7em]',
+          'rounded-xl p-6 shadow-md transition-all duration-700 border border-cyan-300/30',
+          'bg-gradient-to-br from-blue-200/30 to-blue-200/30',
+          animado ? 'animate-fadeIn' : 'opacity-0'
+        )}
       >
-        Lista de Agentes IA
-      </h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-3xl lg:text-2xl font-extrabold bg-gradient-to-r from-cyan-700 via-cyan-700/50 to-cyan-600/40 bg-clip-text text-transparent">
+            Painel de HiperAgentes IA
+          </h2>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto text-black">
-          <thead>
-            <tr className="bg-blue-500/5 text-left text-sm uppercase tracking-wider text-primary backdrop-blur-sm">
-              <th className="px-4 py-2 border-b border-blue-400/30">Nome</th>
-              <th className="px-4 py-2 border-b border-blue-400/30">Tipo</th>
-              <th className="px-4 py-2 border-b border-blue-400/30">Status</th>
-              <th className="px-4 py-2 border-b border-blue-400/30">Histórico</th>
-              <th className="px-4 py-2 border-b border-blue-400/30">Configurações</th>
-              <th className="px-4 py-2 border-b border-blue-400/30 text-center">
-                Ações
-              </th>
-            </tr>
-          </thead>
+          <Button
+            size="sm"
+            variant="default"
+            className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold"
+            onClick={() => setShowNovoAgente((prev) => !prev)}
+          >
+            <FaPlus className="mr-2" /> Criar Novo Agente
+          </Button>
+        </div>
 
-          <tbody>
-            {agentes.map((agente) => (
-              <tr
-                key={agente.id}
-                className={`hover:bg-blue-500/5 transition border-b border-blue-400/20 ${
-                  animacao ? 'animate-slideIn' : 'opacity-0'
-                }`}
-              >
-                <td
-                  className="
-                    px-4 py-2 font-medium
-                    bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent
-                  "
-                >
-                  {agente.nome}
-                </td>
+        {showNovoAgente && (
+          <div className="mb-6">
+            <CriarNovoAgente
+              onSalvar={(novoAgente) => {
+                onCriarNovoAgente(novoAgente)
+                setShowNovoAgente(false)
+              }}
+              onCancelar={() => setShowNovoAgente(false)}
+            />
+          </div>
+        )}
 
-                <td
-                  className="
-                    px-4 py-2 capitalize font-medium 
-                    bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent
-                  "
-                >
-                  {agente.tipo}
-                </td>
-
-                <td className="px-4 py-2">
-                  <span
-                    className={`inline-block w-3 h-3 rounded-full mr-2 animate-pulse ${
-                      agente.status === 'ativo'
-                        ? 'bg-green-500 shadow-green-500/50'
-                        : agente.status === 'inativo'
-                        ? 'bg-red-500 shadow-red-500/50'
-                        : 'bg-yellow-500 shadow-yellow-500/50'
-                    }`}
-                  ></span>
-                  <Badge
-                    variant={
-                      agente.status === 'ativo'
-                        ? 'success'
-                        : agente.status === 'inativo'
-                        ? 'destructive'
-                        : agente.status === 'em configuração'
-                        ? 'warning'
-                        : 'secondary'
-                    }
-                  >
-                    {agente.status.toUpperCase()}
-                  </Badge>
-                </td>
-
-                <td className="px-4 py-2">
-                  {agente.historico?.length ? (
-                    <ul>
-                      {agente.historico.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <span className="italic text-gray-500">Nenhum histórico</span>
-                  )}
-                </td>
-
-                <td className="px-4 py-2">
-                  {agente.configuracoes?.length ? (
-                    <ul>
-                      {agente.configuracoes.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <span className="italic text-gray-500">
-                      Nenhuma configuração
-                    </span>
-                  )}
-                </td>
-
-                <td className="px-4 py-2 text-center">
-                  <div className="flex justify-center gap-2">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            aria-label="Editar Agente"
-                            variant="secondary"
-                            size="sm"
-                            className="
-                              bg-primary/50 
-                              hover:bg-accent/90 
-                              text-white 
-                              font-medium 
-                              transition 
-                              duration-200 
-                              backdrop-blur-sm
-                            "
-                            onClick={() => onEditar(agente.id)}
-                          >
-                            Editar
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>Editar Agente</TooltipContent>
-                      </Tooltip>
-
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            aria-label="Excluir Agente"
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => {
-                              try {
-                                onExcluir(agente.id);
-                              } catch (e) {
-                                setError('Erro ao excluir o agente.');
-                              }
-                            }}
-                          >
-                            Excluir
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>Excluir Agente</TooltipContent>
-                      </Tooltip>
-
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            aria-label={
-                              agente.status === 'ativo'
-                                ? 'Desativar Agente'
-                                : 'Ativar Agente'
-                            }
-                            variant="default"
-                            size="sm"
-                            className={`
-                              ${
-                                agente.status === 'ativo'
-                                  ? 'bg-red-600 hover:bg-red-700 text-white'
-                                  : 'bg-blue-600 hover:bg-blue-700 text-white'
-                              }
-                              transition-all
-                            `}
-                            onClick={() => onAtivarDesativar(agente.id)}
-                          >
-                            {agente.status === 'ativo' ? 'Desativar' : 'Ativar'}
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>Ativar/Desativar</TooltipContent>
-                      </Tooltip>
-
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            aria-label="Mais opções"
-                            variant="ghost"
-                            size="icon"
-                            className="hover:bg-blue-500/10"
-                          >
-                            <MoreHorizontal className="w-5 h-5 text-primary" />
-                          </Button>
-                        </DropdownMenuTrigger>
-
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem
-                            onClick={() => console.log('Logs Agente')}
-                          >
-                            Visualizar Logs
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => console.log('Config Avançada')}
-                          >
-                            Configuração Avançada
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TooltipProvider>
-                  </div>
-                </td>
+        <div className="overflow-auto rounded-lg">
+          <table className="min-w-full table-auto">
+            <thead>
+              <tr className="text-sm text-cyan-700/80 bg-cyan-600/10 backdrop-blur-sm">
+                <th className="px-4 py-3 text-left">Nome</th>
+                <th className="px-4 py-3 text-left">Tipo</th>
+                <th className="px-4 py-3 text-left">Conversas</th>
+                <th className="px-4 py-3 text-left">Tickets</th>
+                <th className="px-4 py-3 text-left">Sucesso</th>
+                <th className="px-4 py-3 text-left">IA</th>
+                <th className="px-4 py-3 text-left">Sessão WhatsApp</th>
+                <th className="px-4 py-3 text-center">Ações</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
 
-      <div className="flex justify-center pt-6">
-        <Button
-          onClick={onCriarNovoAgente}
-          className="
-            bg-primary/50 
-            hover:bg-accent/90 
-            text-white 
-            font-medium 
-            py-2 px-6 
-            rounded 
-            transition 
-            duration-200 
-            backdrop-blur-sm
-          "
-        >
-          Criar Novo Agente
-        </Button>
+            <tbody>
+              {agentes.map((agente) => (
+                <tr
+                  key={agente.id}
+                  className="border-b border-cyan-300/20 hover:bg-cyan-100/10 transition-all"
+                >
+                  <td className="px-4 py-3 font-semibold text-cyan-900 flex items-center gap-2">
+                    <FaRobot className="text-cyan-500" /> {agente.nome}
+                  </td>
+                  <td className="px-4 py-3 font-medium capitalize text-cyan-800">{agente.tipo}</td>
+                  <td className="px-4 py-3">{agente.conversas}</td>
+                  <td className="px-4 py-3">{agente.tickets}</td>
+                  <td className="px-4 py-3">
+                    <Badge
+                      className={cn(
+                        'text-white font-bold',
+                        agente.sucesso >= 90
+                          ? 'bg-emerald-500'
+                          : agente.sucesso >= 70
+                          ? 'bg-emerald-500'
+                          : 'bg-red-500'
+                      )}
+                    >
+                      {agente.sucesso}%
+                    </Badge>
+                  </td>
+                  <td className="px-4 py-3">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge
+                          variant="outline"
+                          className={cn(
+                            'px-2 text-xs cursor-default',
+                            agente.iaTreinada
+                              ? 'border-emerald-500 text-emerald-500'
+                              : 'border-emerald-500 text-emerald-500'
+                          )}
+                        >
+                          {agente.iaTreinada ? 'IA Treinada' : 'Treinamento Pendente'}
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">
+                        {agente.iaTreinada
+                          ? 'Este agente está com IA pronta para responder.'
+                          : 'A IA deste agente ainda não foi treinada completamente.'}
+                      </TooltipContent>
+                    </Tooltip>
+                  </td>
+                  <td className="px-4 py-3">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="inline-flex items-center gap-1 px-2 py-1 rounded bg-white/10 border border-cyan-200 text-xs text-cyan-800">
+                          {getStatusIcon(agente.sessaoWhatsapp)}
+                          {agente.sessaoWhatsapp}
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">
+                        Status atual da sessão WhatsApp do agente.
+                      </TooltipContent>
+                    </Tooltip>
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <div className="flex flex-wrap justify-center items-center gap-1">
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        className="bg-cyan-600 hover:bg-cyan-700 text-white min-w-[100px]"
+                        onClick={() => onVerDetalhes(agente.id)}
+                      >
+                        Ver Detalhes
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="text-cyan-600 hover:text-cyan-800"
+                        onClick={() => onExportar(agente.id)}
+                      >
+                        <FaDownload />
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="text-cyan-600 hover:text-cyan-800"
+                        onClick={() => onDuplicar(agente.id)}
+                      >
+                        <FaCopy />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className={cn(
+                          'text-white font-semibold min-w-[100px]',
+                          agente.status === 'ativo'
+                            ? 'bg-red-500 hover:bg-red-600'
+                            : 'bg-emerald-500 hover:bg-emerald-600'
+                        )}
+                        onClick={() => onAtivarDesativar(agente.id)}
+                      >
+                        {agente.status === 'ativo' ? 'Desativar' : 'Ativar'}
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default ListaDeAgentes;
+    </TooltipProvider>
+  )
+}

@@ -1,14 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-
-type Agente = {
-  id: string
-  nome: string
-  tipo: string
-  status: 'ativo' | 'inativo'
-  descricao?: string
-}
+import { Agente } from '../types/agente'
 
 type Props = {
   agente: Agente
@@ -23,7 +16,13 @@ const EditarAgente = ({ agente, onSalvar, onCancelar }: Props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    onSalvar({ ...agente, nome, tipo: tipoAgente, descricao })
+
+    onSalvar({
+      ...agente,
+      nome,
+      tipo: tipoAgente,
+      descricao,
+    })
   }
 
   return (
@@ -61,6 +60,8 @@ const EditarAgente = ({ agente, onSalvar, onCancelar }: Props) => {
             <option value="">Selecione um tipo</option>
             <option value="suporte">Suporte</option>
             <option value="vendas">Vendas</option>
+            <option value="dev">Dev</option>
+            <option value="marketing">Marketing</option>
           </select>
         </div>
 

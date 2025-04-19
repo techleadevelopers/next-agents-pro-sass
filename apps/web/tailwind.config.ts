@@ -35,6 +35,24 @@ const config: Config = {
         '8xl': '96rem', // Define uma largura maior (1536px)
         '9xl': '108rem', // Define uma largura ainda maior (1728px)
       },
+      /** 🔥 AQUI ESTÃO OS EFEITOS ADICIONADOS */
+      animation: {
+        glint: 'glint 4s linear infinite',
+        'border-glint': 'border-glint 4s linear infinite',
+      },
+      keyframes: {
+        glint: {
+          '0%': { left: '-120%' },
+          '8%': { left: '50%' },
+          '100%': { left: '50%' },
+        },
+        'border-glint': {
+          '0%': { backgroundPosition: '0px, -250px' },
+          '25%': { backgroundPosition: '0px, -200px' },
+          '75%': { backgroundPosition: '0px, 50px' },
+          '100%': { backgroundPosition: '0px, 50px' },
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

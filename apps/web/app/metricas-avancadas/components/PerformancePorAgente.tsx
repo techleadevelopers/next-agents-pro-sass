@@ -1,26 +1,25 @@
-'use client'
+'use client';
 
-import { FC } from 'react'
-import BarChartHorizontal from '../../charts/BarChartHorizontal'
+import { FC } from 'react';
+import BarChartHorizontal from '../../charts/BarChartHorizontal';
 import {
   SectionTitle,
   StatisticCard,
   ChartContainer,
   ChartLoader,
-  ProgressCircular,
-} from '../../packages/ui/src'
+} from '../../packages/ui/src';
 import {
   UserGroupIcon,
   ChatBubbleLeftRightIcon,
   ClockIcon,
-} from '@heroicons/react/24/outline'
+} from '@heroicons/react/24/outline';
 
 interface PerformancePorAgenteProps {
   data: {
-    agent: string
-    atendimentos: number
-  }[]
-  isLoading: boolean
+    agent: string;
+    atendimentos: number;
+  }[];
+  isLoading: boolean;
 }
 
 const PerformancePorAgente: FC<PerformancePorAgenteProps> = ({
@@ -30,7 +29,7 @@ const PerformancePorAgente: FC<PerformancePorAgenteProps> = ({
   const totalAttendances = data.reduce(
     (acc, item) => acc + item.atendimentos,
     0
-  )
+  );
 
   return (
     <ChartContainer
@@ -49,17 +48,15 @@ const PerformancePorAgente: FC<PerformancePorAgenteProps> = ({
           icon={<UserGroupIcon className="w-6 h-6" />}
           variant="success"
         />
-
         <StatisticCard
           label="Atendimentos Totais"
           value={totalAttendances}
           icon={<ChatBubbleLeftRightIcon className="w-6 h-6" />}
           variant="warning"
         />
-
         <StatisticCard
           label="SLA Médio (s)"
-          value={23} // pode vir por prop depois do backend
+          value={23}
           icon={<ClockIcon className="w-6 h-6" />}
           variant="danger"
         />
@@ -76,7 +73,7 @@ const PerformancePorAgente: FC<PerformancePorAgenteProps> = ({
         />
       )}
     </ChartContainer>
-  )
-}
+  );
+};
 
-export default PerformancePorAgente
+export default PerformancePorAgente;

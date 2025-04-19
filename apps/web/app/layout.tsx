@@ -1,7 +1,8 @@
-import "./globals.css" // CORRETO
+import "./globals.css"
 
 import type { Metadata } from "next"
 import { Inter, Orbitron } from "next/font/google"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,7 +18,7 @@ const orbitron = Orbitron({
 })
 
 export const metadata: Metadata = {
-  title: "NexAgent-Pro",
+  title: "NextAgentAI-Pro",
   description: "Gestão brutal de HyperAgentes IA.",
 }
 
@@ -39,6 +40,7 @@ export default function RootLayout({
         `}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   )
