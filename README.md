@@ -1,7 +1,37 @@
 
 # 🚀 NextAgent-Pro
 
-> Plataforma SaaS White-label | HiperAgentes IA Multi-Tenant | WhatsApp Automation | DevOps Clean Architecture | IA Local
+
+<p align="center">
+  Plataforma SaaS de HiperAgentes IA com arquitetura modular, IA local + OpenAI, integração real com WhatsApp e experiência Sci-Fi.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/IA-OpenAI%20%2B%20LangChain%20%2B%20Ollama-10b2f5?style=flat-square&logo=openai&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Backend-NestJS%20%2B%20Prisma-e0234e?style=flat-square&logo=nestjs&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Database-PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Frontend-Next.js%20%2B%20Tailwind-000000?style=flat-square&logo=nextdotjs"/>
+  <img src="https://img.shields.io/badge/UI-ShadCN%20%2B%20Radix%20UI-7c3aed?style=flat-square"/>
+  <img src="https://img.shields.io/badge/WhatsApp-Baileys%20SDK-25D366?style=flat-square&logo=whatsapp&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Infra-Terraform%20%2B%20CI--CD-623ce4?style=flat-square&logo=terraform"/>
+  <img src="https://img.shields.io/badge/Arquitetura-Clean%20%7C%20DDD%20%7C%20Multi--Tenant-0f172a?style=flat-square"/>
+</p>
+
+<h1 align="center">🚀 Enterprise Landing</h1>
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=15fbR2kOEJlHHlOA449l4ZJpGOgcuBZr3" width="740" />
+</p>
+
+<h1 align="center">🧑‍💻 Panel Admin Landing</h1>
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1ldhr-0H1sNO0vyr1UNctKz6rSSuYOr9e" width="740" />
+</p>
+
+<h1 align="center">🔐 Login Landing</h1>
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=12KZoBrGcJS5uIurMwM7KG5paY8FFjhFR" width="740" />
+</p>
+
 
 Automatize o atendimento da sua empresa com IA própria, reduza custos com APIs pagas e escale seu suporte via WhatsApp com um painel futurista de controle.
 

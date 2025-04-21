@@ -3,7 +3,7 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard/ui/card'
 import dynamic from 'next/dynamic'
-import './PieChart'
+
 import { PieChart } from 'recharts'
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
